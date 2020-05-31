@@ -1,0 +1,18 @@
+# OS
+.DS_Store
+
+# build
+dist
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# dotenv environment variables file
+.env
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache

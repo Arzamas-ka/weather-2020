@@ -1,0 +1,31 @@
+@import './variables';
+
+.toaster-error {
+  position: fixed;
+  top: 65px;
+  right: 0;
+
+  width: 300px;
+  height: 40px;
+  padding: 10px 20px 10px 20px;
+
+  background-color: #fffaa7;
+  border: 1px solid black;
+  border-radius: 3px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+
+  transition: all 0.7s ease;
+  transform: translateX(100%);
+  z-index: 50;
+
+  &--open {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  &--close {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}

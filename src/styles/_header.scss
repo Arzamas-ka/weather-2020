@@ -1,0 +1,241 @@
+@import './variables';
+
+.header {
+  display: flex;
+  justify-content: space-between;
+
+  &-tools {
+    display: flex;
+    justify-content: space-between;
+
+    @media screen and (min-width: 320px) and (max-width: 800px) {
+      justify-content: center;
+
+      margin: {
+        bottom: 40px;
+      }
+    }
+  }
+
+  &-search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media screen and (min-width: 320px) and (max-width: 413px) {
+      flex-wrap: wrap;
+    }
+  }
+
+  &-update {
+    width: 45px;
+    height: 45px;
+    margin: {
+      right: 10px;
+    }
+
+    font-size: 22px;
+    color: $white;
+    border: none;
+    border-radius: 7px;
+    background-color: $grey;
+
+    outline: none;
+
+    cursor: pointer;
+
+    &:hover {
+      background-color: $lightgrey;
+      color: $black;
+    }
+
+    &:active {
+      background-color: $darkgrey;
+    }
+  }
+
+  &-languages {
+    display: flex;
+
+    &__btn {
+      width: 45px;
+      height: 45px;
+
+      border: none;
+      background-color: $grey;
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: $white;
+      outline: none;
+
+      cursor: pointer;
+    }
+
+    &__btn--active {
+      background-color: $darkgrey-opacity;
+    }
+
+    &__btn:first-child {
+      border-radius: 10px 0 0 10px;
+    }
+
+    &__btn:last-child {
+      margin-right: 10px;
+
+      border-radius: 0 7px 7px 0;
+    }
+
+    &__btn:hover {
+      background-color: $lightgrey;
+
+      color: $black;
+    }
+
+    &__btn:active {
+      background-color: $darkgrey;
+
+      color: $white;
+    }
+  }
+
+  &__temperature {
+    width: 45px;
+    height: 45px;
+
+    font-size: 14px;
+    font-weight: 600;
+    color: $white;
+    border: none;
+    background-color: $grey;
+    border-radius: 7px 0 0 7px;
+    outline: none;
+
+    cursor: pointer;
+
+    &:last-child {
+      border-radius: 0 7px 7px 0;
+    }
+
+    &--active {
+      background-color: $darkgrey-opacity;
+    }
+
+    &:hover {
+      background-color: $lightgrey;
+
+      color: $black;
+    }
+
+    &:active {
+      background-color: $darkgrey;
+
+      color: $white;
+    }
+  }
+
+  &-input {
+    position: relative;
+
+    width: 300px;
+    height: 45px;
+
+    border: none;
+    border-radius: 10px 0 0 10px;
+    background-color: $darkgrey-opacity;
+    outline: none;
+
+    &::placeholder {
+      font-size: 15px;
+      font-weight: 200;
+
+      color: $white;
+    }
+
+    &[value] {
+      padding-left: 20px;
+
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 1px;
+
+      color: $white;
+    }
+
+    @media screen and (min-width: 320px) and (max-width: 413px) {
+      width: 235px;
+    }
+  }
+
+  &-microphone {
+    width: 45px;
+    height: 45px;
+
+    padding: {
+      top: 12px;
+      right: 10px;
+      left: 10px;
+      bottom: 12px;
+    }
+
+    background-color: $darkgrey-opacity;
+
+    cursor: pointer;
+
+    @media screen and (min-width: 320px) and (max-width: 413px) {
+      border-radius: 0 10px 10px 0;
+    }
+  }
+
+  &__search-btn {
+    height: 45px;
+    width: 120px;
+    padding: 10px 25px;
+
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: $white;
+    border: none;
+    border-radius: 0 10px 10px 0;
+    background-color: $grey;
+    text-transform: uppercase;
+    outline: none;
+
+    cursor: pointer;
+
+    &:hover {
+      background-color: $lightgrey;
+      color: $black;
+    }
+
+    &:active {
+      background-color: $darkgrey;
+      color: $white;
+    }
+
+    @media screen and (min-width: 320px) and (max-width: 413px) {
+      margin: {
+        top: 10px;
+      }
+
+      border-radius: 10px;
+    }
+  }
+
+  @media screen and (min-width: 320px) and (max-width: 800px) {
+    flex-direction: column;
+
+    margin: {
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+  }
+}
+
+.header-input.header-input--error {
+  border: 3px solid red;
+  color: red;
+}

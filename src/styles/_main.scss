@@ -1,0 +1,340 @@
+@import './variables';
+
+.main {
+  display: flex;
+  justify-content: space-between;
+
+  @media screen and (min-width: 801px) {
+    justify-content: space-between;
+  }
+
+  @media screen and (min-width: 320px) and (max-width: 1000px) {
+    flex-direction: column;
+  }
+}
+
+.section-left {
+  display: flex;
+  flex-direction: column;
+
+  margin: {
+    top: 40px;
+    right: 20px;
+  }
+  padding: {
+    top: 20px;
+    right: 20px;
+    bottom: 20px;
+    left: 20px;
+  }
+  width: 50%;
+
+  background-color: $darkgrey-opacity;
+  border-radius: 20px;
+
+  &__location-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+
+    margin: {
+      bottom: 20px;
+    }
+
+    @media screen and (min-width: 320px) and (max-width: 800px) {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &__location {
+    &--city,
+    &--country {
+      margin: {
+        right: 5px;
+      }
+
+      font-size: 40px;
+      font-weight: 900;
+      color: $white;
+      text-transform: uppercase;
+
+      @media screen and (min-width: 320px) and (max-width: 800px) {
+        font-size: 30px;
+      }
+    }
+
+    &--flag {
+      height: 50px;
+
+      font-size: 40px;
+    }
+  }
+
+  &__date-container {
+    display: flex;
+    justify-content: center;
+
+    margin: {
+      bottom: 15px;
+    }
+
+    font-size: 26px;
+    font-weight: 600;
+    color: $white;
+    text-transform: uppercase;
+
+    & span {
+      margin: {
+        right: 5px;
+      }
+    }
+
+    @media screen and (min-width: 320px) and (max-width: 800px) {
+      font-size: 16px;
+    }
+  }
+
+  &__current-weather-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    @media screen and (min-width: 320px) and (max-width: 800px) {
+      flex-direction: column;
+    }
+  }
+
+  &__current-degree {
+    position: relative;
+    width: 305px;
+
+    font-size: 150px;
+    font-weight: 800;
+    color: $white;
+
+    &__icon {
+      width: 100px;
+      height: 100px;
+
+      margin: {
+        bottom: 30px;
+      }
+    }
+
+    @media screen and (min-width: 320px) and (max-width: 800px) {
+      margin: {
+        right: 0;
+      }
+      height: auto;
+    }
+  }
+
+  &__precipitation-container {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+
+    width: 215px;
+    margin: {
+      right: 10px;
+    }
+
+    font-size: 19px;
+    font-weight: 800;
+    color: $white;
+    text-transform: uppercase;
+
+    & span {
+      margin-bottom: 5px;
+    }
+
+    @media screen and (min-width: 799px) and (max-width: 1000px) {
+      text-align: initial;
+    }
+
+    @media screen and (min-width: 320px) and (max-width: 800px) {
+      align-items: center;
+
+      font-size: 14px;
+    }
+  }
+
+  &__precipitation {
+    &--icon {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 30px;
+    }
+  }
+
+  &__phenomena {
+    &--wind-phenomena,
+    &--wind-speed {
+      text-transform: lowercase;
+    }
+  }
+
+  &__phenomena-container {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  &__feature-weather-container {
+    display: flex;
+    justify-content: space-around;
+
+    margin: {
+      top: 20px;
+    }
+  }
+
+  &__day-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin: {
+      right: 35px;
+      bottom: 40px;
+    }
+
+    font-size: 70px;
+    font-weight: 800;
+    color: $white;
+    text-transform: uppercase;
+
+    & span:nth-child(1) {
+      font-size: 20px;
+    }
+
+    #img-tomorrow,
+    #img-after-tomorrow,
+    #img-second-after-tomorrow {
+      width: 50px;
+      height: 50px;
+      margin: {
+        left: 10px;
+      }
+    }
+
+    @media screen and (min-width: 320px) and (max-width: 800px) {
+      align-items: center;
+
+      margin: {
+        right: 0;
+      }
+    }
+
+    @media screen and (min-width: 320px) and (max-width: 800px) {
+      flex-direction: column;
+      align-items: center;
+
+      font-size: 50px;
+    }
+  }
+
+  @media screen and (min-width: 320px) and (max-width: 1000px) {
+    width: 95%;
+    margin: {
+      top: 0;
+      right: 10px;
+      left: 10px;
+    }
+
+    align-self: center;
+    text-align: center;
+  }
+}
+
+.section-right {
+  display: flex;
+  flex-direction: column;
+
+  &__map {
+    width: 470px;
+    height: 350px;
+
+    margin: {
+      top: 150px;
+      right: 10px;
+    }
+
+    border-radius: 20px;
+    background-color: $darkgrey-opacity;
+
+    @media screen and (min-width: 320px) and (max-width: 1000px) {
+      width: 95%;
+      height: 320px;
+
+      margin: {
+        top: 30px;
+        right: 0;
+      }
+    }
+  }
+
+  &__coordinates {
+    display: flex;
+    flex-direction: column;
+
+    background-color: $darkgrey-opacity;
+    border-radius: 20px;
+
+    min-width: 300px;
+    padding: {
+      top: 20px;
+      right: 20px;
+      bottom: 20px;
+      left: 20px;
+    }
+    margin: {
+      top: 30px;
+      right: 10px;
+      bottom: 50px;
+    }
+
+    font-size: 22px;
+    font-weight: 600;
+    color: $white;
+    text-transform: uppercase;
+
+    @media screen and (min-width: 320px) and (max-width: 800px) {
+      align-items: center;
+
+      margin: {
+        bottom: 30px;
+      }
+    }
+  }
+
+  @media screen and (min-width: 320px) and (max-width: 1000px) {
+    align-items: center;
+  }
+}
+
+#map {
+  width: 470px;
+  height: 350px;
+
+  border-radius: 20px;
+
+  @media screen and (min-width: 320px) and (max-width: 1000px) {
+    width: 100%;
+    height: 320px;
+  }
+}
+
+.sound {
+  &-img {
+    width: 40px;
+    height: 40px;
+
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
