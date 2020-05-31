@@ -14,6 +14,8 @@ import initializeSpeechRecognition, { listenToWeather } from './render/renderSpe
 import './styles/init.scss';
 
 showLoader();
+initialAppSettings();
+
 renderHeader();
 renderMain();
 
@@ -27,6 +29,5 @@ getCurrentGeocoding()
   .then(listenToWeather)
   .then(hideLoader);
 
-initialAppSettings();
 eventsApp();
 initializeSpeechRecognition();
