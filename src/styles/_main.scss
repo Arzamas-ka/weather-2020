@@ -141,7 +141,7 @@
       right: 10px;
     }
 
-    font-size: 19px;
+    font-size: 17px;
     font-weight: 800;
     color: $white;
     text-transform: uppercase;
@@ -315,14 +315,24 @@
 }
 
 #map {
-  width: 470px;
+  width: 475px;
   height: 350px;
 
-  border-radius: 20px;
+  -webkit-mask-image: url('../assets/images/map-mask.png');
+  mask-image: url('../assets/images/map-mask.png');
+  -webkit-mask-position: top left;
+  mask-position: top left;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 475px 350px;
+  mask-size: 475px 350px;
 
   @media screen and (min-width: 320px) and (max-width: 1000px) {
     width: 100%;
     height: 320px;
+
+    -webkit-mask-size: 100% 320px;
+    mask-size: 100% 320px;
   }
 }
 

@@ -24,6 +24,12 @@ import thunderstormImg from '../assets/images/thunderstorm.png';
 import tornadoImg from '../assets/images/tornado.png';
 import windImg from '../assets/images/wind.png';
 
+const time = {
+  hours: '',
+  minutes: '',
+  seconds: '',
+};
+
 export const weatherImages = {
   fog: fogImg,
   rain: rainImg,
@@ -60,7 +66,8 @@ export const getTimeOfYear = () => {
 };
 
 export const getTimeOfDay = () => {
-  const nowTimeOfDay = new Date().getHours();
+  // const nowTimeOfDay = new Date().getHours();
+  const nowTimeOfDay = time.hours;
 
   let timeDay = EMPTY_STRING;
 
@@ -147,14 +154,18 @@ export const calculateDateOfSearchCity = (timeZoneOffsetSecs) => {
   const day = locationDate.getDay();
   const hours = locationDate.getHours();
   const minutes = locationDate.getMinutes();
+  const seconds = locationDate.getSeconds();
 
   const minutesResult = checkZeroInMinutes(minutes);
   const hoursResult = checkZeroInMinutes(hours);
+  const secondsResult = checkZeroInMinutes(seconds);
+  time.hours = hoursResult;
 
   return {
     day,
     hoursResult,
     minutesResult,
+    secondsResult,
   };
 };
 

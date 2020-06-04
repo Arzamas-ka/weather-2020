@@ -7,6 +7,7 @@ import getCurrentDate from '../apiData/currentDate';
 import getCurrentWeather from '../apiData/currentWeather';
 import { showLoader, hideLoader } from '../render/renderLoader';
 
+import { sharedLocation } from '../apiData/geocodingData';
 
 const translatePage = async (event) => {
   showLoader();
@@ -21,11 +22,15 @@ const translatePage = async (event) => {
   localStorage.setItem('language', clickedLanguage);
 
   findElement('.section-left__location--flag').textContent = EMPTY_STRING;
-  const lat = findElement('.section__latitude--text').textContent;
-  const long = findElement('.section__longitude--text').textContent;
 
-  await getCurrentWeather({ lat, long });
-  await getCurrentCityCountry({ lat, long });
+  await getCurrentWeather({
+    lat: sharedLocation.latitudeNumber,
+    long: sharedLocation.longitudeNumber,
+  });
+  await getCurrentCityCountry({
+    lat: sharedLocation.latitudeNumber,
+    long: sharedLocation.longitudeNumber,
+  });
   getCurrentDate();
   updateLanguages();
   createTicker();

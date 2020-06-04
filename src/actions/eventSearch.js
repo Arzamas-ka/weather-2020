@@ -8,6 +8,7 @@ import updateBackground from './updateBackground';
 import getCurrentCityCountry from '../apiData/currentDislocation';
 import getCurrentWeather from '../apiData/currentWeather';
 import createTicker from '../render/renderTicker';
+import { sharedLocation } from '../apiData/geocodingData';
 
 const getSearchableCityName = () => findElement('.header-input').value;
 
@@ -17,16 +18,26 @@ const getGeocodingData = (geo) => {
   const lat = geo.results[0].geometry.lat;
   const long = geo.results[0].geometry.lng;
 
+  sharedLocation.latitudeNumber = lat;
+  sharedLocation.longitudeNumber = long;
+
+  return { lat, long };
+};
+
+const getGeocodingDataForRender = (geo) => {
+  const lat = geo.results[0].annotations.DMS.lat;
+  const long = geo.results[0].annotations.DMS.lng;
+
   return { lat, long };
 };
 
 const renderCoordinates = ({ lat, long }) => {
   const latitudeText = findElement('.section__latitude--text');
-  const latitudeNumber = lat.toFixed(3);
+  const latitudeNumber = lat.slice(0, 7);
   latitudeText.textContent = latitudeNumber;
 
   const longitudeText = findElement('.section__longitude--text');
-  const longitudeNumber = long.toFixed(3);
+  const longitudeNumber = long.slice(0, 7);
   longitudeText.textContent = longitudeNumber;
 };
 
@@ -38,8 +49,14 @@ export const handlerSearchButton = async () => {
     const cityGeocodingData = await requestCityGeocodingData(requestUrl);
     await updateBackground();
     const coordinates = getGeocodingData(cityGeocodingData);
-    renderCoordinates(coordinates);
-    await Promise.all([renderMap(coordinates), getCurrentCityCountry(coordinates), getCurrentWeather(coordinates)]);
+
+    const coordinatesForRender = getGeocodingDataForRender(cityGeocodingData);
+    renderCoordinates(coordinatesForRender);
+    await Promise.all([
+      renderMap(coordinates),
+      getCurrentCityCountry(coordinates),
+      getCurrentWeather(coordinates),
+    ]);
     createTicker();
     hideLoader();
   } catch (error) {

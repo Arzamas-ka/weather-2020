@@ -1,7 +1,5 @@
 import { findElement } from '../helpers/helperDOM';
-import {
-  PROXY_URL, DISLOCATION, LANGUAGES_NAME, PARSE_INT_BASE
-} from '../constants/constants';
+import { PROXY_URL, DISLOCATION, LANGUAGES_NAME, PARSE_INT_BASE } from '../constants/constants';
 import { calculateDateOfSearchCity, errorShow } from '../helpers/helperUI';
 
 let intervalId = null;
@@ -34,6 +32,22 @@ const getCurrentCityCountry = ({ lat, long }) => {
       if (!data.results[0].components.city) {
         findElement(
           '.section-left__location--city'
+        ).textContent = `${data.results[0].components.hamlet}`;
+      } else if (!data.results[0].components.city) {
+        findElement(
+          '.section-left__location--city'
+        ).textContent = `${data.results[0].components.town}`;
+      } else if (!data.results[0].components.city) {
+        findElement(
+          '.section-left__location--city'
+        ).textContent = `${data.results[0].components.state}`;
+      } else if (!data.results[0].components.city) {
+        findElement(
+          '.section-left__location--city'
+        ).textContent = `${data.results[0].components.road}`;
+      } else if (!data.results[0].components.city) {
+        findElement(
+          '.section-left__location--city'
         ).textContent = `${data.results[0].components.country}`;
       } else {
         findElement(
@@ -51,8 +65,8 @@ const getCurrentCityCountry = ({ lat, long }) => {
           data.results[0].annotations.timezone.offset_sec,
           PARSE_INT_BASE
         );
-        const { hoursResult, minutesResult } = calculateDateOfSearchCity(timezoneOffsetSeconds);
-        const time = `${hoursResult}:${minutesResult}`;
+        const { hoursResult, minutesResult, secondsResult } = calculateDateOfSearchCity(timezoneOffsetSeconds);
+        const time = `${hoursResult}:${minutesResult}:${secondsResult}`;
         findElement('.section-left__date--hours').textContent = time;
       }, 1000);
       drawFlag(data.results[0].annotations.flag);
