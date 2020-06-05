@@ -22,7 +22,6 @@ console.log(
 const getInformationWeatherPage = () => {
   const city = findElement('.section-left__location--city').textContent;
   const country = findElement('.section-left__location--country').textContent;
-  const today = findElement('.section-left__date--day').textContent;
   const month = findElement('.section-left__date--month').textContent;
   const dayNumeric = findElement('.section-left__date--day-numeric').textContent;
   const degree = findElement('.section-left__current-degree').textContent;
@@ -31,9 +30,8 @@ const getInformationWeatherPage = () => {
   return {
     city,
     country,
-    today,
-    month,
     dayNumeric,
+    month,
     degree,
     summary,
   };
@@ -48,7 +46,6 @@ const textToSpeech = debounce((codeWord) => {
   const speech = new SpeechSynthesisUtterance(
     `${text.city}
     ${text.country}
-    ${text.today}
     ${text.dayNumeric}
     ${text.month}
     ${text.degree}

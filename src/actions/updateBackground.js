@@ -24,6 +24,7 @@ const updateBackground = async () => {
       const imageUrl = `${image.urls.regular}`;
       findElement('body').style.backgroundImage = `url(${imageUrl})`;
       findElement('body').style.backgroundSize = 'cover';
+      findElement('body').setAttribute('loading', 'lazy');
     })
     .then(hideLoader())
     .catch((error) => errorShow(error));
