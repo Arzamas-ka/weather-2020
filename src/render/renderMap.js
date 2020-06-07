@@ -15,6 +15,8 @@ const renderMap = ({ lat, long }) => {
     zoom: 10,
   });
 
+  map.addControl(new window.mapboxgl.NavigationControl());
+
   // draw icon in map
   const size = 150;
 

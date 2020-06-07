@@ -76,3 +76,9 @@ export const BACKGROUND = {
   apiUrl: 'https://api.unsplash.com/photos/random',
   token: 'e5699fab12072522a93a44c7d006705c901eab0fb363e4350d87536fb282369e',
 };
+
+export const HTTP_CODES = {
+  OK: 200,
+  BAD_REQUEST: 400,
+  SERVER_ERROR: 500,
+};

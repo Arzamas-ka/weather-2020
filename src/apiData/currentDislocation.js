@@ -1,5 +1,7 @@
 import { findElement } from '../helpers/helperDOM';
-import { PROXY_URL, DISLOCATION, LANGUAGES_NAME, PARSE_INT_BASE } from '../constants/constants';
+import {
+  PROXY_URL, DISLOCATION, LANGUAGES_NAME, PARSE_INT_BASE, HTTP_CODES
+} from '../constants/constants';
 import { calculateDateOfSearchCity, errorShow } from '../helpers/helperUI';
 
 let intervalId = null;
@@ -25,35 +27,36 @@ const getCurrentCityCountry = ({ lat, long }) => {
 
   return fetch(`${PROXY_URL}${requestUrlCityCountry}`)
     .then((response) => {
-      if (response.status >= 400) throw new Error(`${response.status} ${response.statusText}`);
+      if (response.status >= HTTP_CODES.BAD_REQUEST) throw new Error(`${response.status} ${response.statusText}`);
       return response.json();
     })
     .then((data) => {
-      if (!data.results[0].components.city) {
+      if (data.results[0].components.city) {
         findElement(
           '.section-left__location--city'
-        ).textContent = `${data.results[0].components.hamlet}`;
-      } else if (!data.results[0].components.city) {
+        ).textContent = `${data.results[0].components.city}`;
+      } else if (!data.results[0].components.hamlet) {
         findElement(
           '.section-left__location--city'
         ).textContent = `${data.results[0].components.town}`;
-      } else if (!data.results[0].components.city) {
+      } else if (!data.results[0].components.town) {
         findElement(
           '.section-left__location--city'
         ).textContent = `${data.results[0].components.state}`;
-      } else if (!data.results[0].components.city) {
+      } else if (!data.results[0].components.state) {
         findElement(
           '.section-left__location--city'
         ).textContent = `${data.results[0].components.road}`;
       } else if (!data.results[0].components.city) {
         findElement(
           '.section-left__location--city'
-        ).textContent = `${data.results[0].components.country}`;
+        ).textContent = `${data.results[0].components.county}`;
       } else {
         findElement(
           '.section-left__location--city'
-        ).textContent = `${data.results[0].components.city}`;
+        ).textContent = `${data.results[0].components.hamlet}`;
       }
+
       findElement(
         '.section-left__location--country'
       ).textContent = `${data.results[0].components.country}`;
@@ -65,7 +68,9 @@ const getCurrentCityCountry = ({ lat, long }) => {
           data.results[0].annotations.timezone.offset_sec,
           PARSE_INT_BASE
         );
-        const { hoursResult, minutesResult, secondsResult } = calculateDateOfSearchCity(timezoneOffsetSeconds);
+        const { hoursResult, minutesResult, secondsResult } = calculateDateOfSearchCity(
+          timezoneOffsetSeconds
+        );
         const time = `${hoursResult}:${minutesResult}:${secondsResult}`;
         findElement('.section-left__date--hours').textContent = time;
       }, 1000);

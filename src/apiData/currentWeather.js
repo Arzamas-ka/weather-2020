@@ -6,7 +6,8 @@ import {
   LANGUAGES_NAME,
   TEMPERATURE_NAMES,
   COEFFICIENT_CELSIUS_FAHRENHEIT,
-  SPACE
+  SPACE,
+  HTTP_CODES
 } from '../constants/constants';
 import {
   weatherImages,
@@ -21,7 +22,9 @@ const drawCelsiusElements = (data) => {
   )}${DEGREE_SIGN}`;
   findElement('.section-left__precipitation--icon').src = `${weatherImages[data.currently.icon]}`;
   findElement('.section-left__precipitation--summary').textContent = data.currently.summary;
-  findElement('.section-left__phenomena--feels-phenomena').innerHTML = `${SPACE} ${convertFahrenheitToCelsius(
+  findElement(
+    '.section-left__phenomena--feels-phenomena'
+  ).innerHTML = `${SPACE} ${convertFahrenheitToCelsius(
     roundInteger(data.currently.apparentTemperature)
   )}${DEGREE_SIGN}`;
   findElement('.section-left__phenomena--wind-phenomena').innerHTML = `${SPACE} ${roundInteger(
@@ -35,12 +38,16 @@ const drawCelsiusElements = (data) => {
       COEFFICIENT_CELSIUS_FAHRENHEIT.half
   )}${DEGREE_SIGN}`;
   findElement('#img-tomorrow').src = `${weatherImages[data.daily.data[1].icon]}`;
-  findElement('.section-left__day--degree-after-tomorrow').innerHTML = `${convertFahrenheitToCelsius(
+  findElement(
+    '.section-left__day--degree-after-tomorrow'
+  ).innerHTML = `${convertFahrenheitToCelsius(
     roundInteger(data.daily.data[2].temperatureMin + data.daily.data[2].temperatureMax) /
       COEFFICIENT_CELSIUS_FAHRENHEIT.half
   )}${DEGREE_SIGN}`;
   findElement('#img-after-tomorrow').src = `${weatherImages[data.daily.data[2].icon]}`;
-  findElement('.section-left__day--degree-second-day-after-tomorrow').innerHTML = `${convertFahrenheitToCelsius(
+  findElement(
+    '.section-left__day--degree-second-day-after-tomorrow'
+  ).innerHTML = `${convertFahrenheitToCelsius(
     roundInteger(data.daily.data[3].temperatureMin + data.daily.data[3].temperatureMax) /
       COEFFICIENT_CELSIUS_FAHRENHEIT.half
   )}${DEGREE_SIGN}`;
@@ -48,7 +55,9 @@ const drawCelsiusElements = (data) => {
 };
 
 const drawFahrenheitElements = (data) => {
-  findElement('.section-left__current-degree').innerHTML = `${roundInteger(data.currently.temperature)}${DEGREE_SIGN}`;
+  findElement('.section-left__current-degree').innerHTML = `${roundInteger(
+    data.currently.temperature
+  )}${DEGREE_SIGN}`;
   findElement('.section-left__precipitation--icon').src = `${weatherImages[data.currently.icon]}`;
   findElement('.section-left__precipitation--summary').textContent = data.currently.summary;
   findElement('.section-left__phenomena--feels-phenomena').innerHTML = `${SPACE} ${roundInteger(
@@ -61,15 +70,18 @@ const drawFahrenheitElements = (data) => {
     roundInteger(data.currently.humidity) * COEFFICIENT_CELSIUS_FAHRENHEIT.percent
   }%`;
   findElement('.section-left__day--degree-tomorrow').innerHTML = `${roundInteger(
-    (data.daily.data[1].temperatureMin + data.daily.data[1].temperatureMax) / COEFFICIENT_CELSIUS_FAHRENHEIT.half
+    (data.daily.data[1].temperatureMin + data.daily.data[1].temperatureMax) /
+      COEFFICIENT_CELSIUS_FAHRENHEIT.half
   )}${DEGREE_SIGN}`;
   findElement('#img-tomorrow').src = `${weatherImages[data.daily.data[1].icon]}`;
   findElement('.section-left__day--degree-after-tomorrow').innerHTML = `${roundInteger(
-    (data.daily.data[2].temperatureMin + data.daily.data[2].temperatureMax) / COEFFICIENT_CELSIUS_FAHRENHEIT.half
+    (data.daily.data[2].temperatureMin + data.daily.data[2].temperatureMax) /
+      COEFFICIENT_CELSIUS_FAHRENHEIT.half
   )}${DEGREE_SIGN}`;
   findElement('#img-after-tomorrow').src = `${weatherImages[data.daily.data[2].icon]}`;
   findElement('.section-left__day--degree-second-day-after-tomorrow').innerHTML = `${roundInteger(
-    (data.daily.data[3].temperatureMin + data.daily.data[3].temperatureMax) / COEFFICIENT_CELSIUS_FAHRENHEIT.half
+    (data.daily.data[3].temperatureMin + data.daily.data[3].temperatureMax) /
+      COEFFICIENT_CELSIUS_FAHRENHEIT.half
   )}${DEGREE_SIGN}`;
   findElement('#img-second-after-tomorrow').src = `${weatherImages[data.daily.data[3].icon]}`;
 };
@@ -91,7 +103,7 @@ const getCurrentWeather = ({ lat, long }) => {
 
   return fetch(`${PROXY_URL}${requestUrlWeather}`)
     .then((response) => {
-      if (response.status >= 400) throw new Error(`${response.status} ${response.statusText}`);
+      if (response.status >= HTTP_CODES.BAD_REQUEST) throw new Error(`${response.status} ${response.statusText}`);
       return response.json();
     })
     .then((data) => {

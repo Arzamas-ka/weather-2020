@@ -1,7 +1,8 @@
 import { findElement } from '../helpers/helperDOM';
-import { BACKGROUND, EMPTY_STRING, PROXY_URL } from '../constants/constants';
+import {
+  BACKGROUND, EMPTY_STRING, PROXY_URL, HTTP_CODES
+} from '../constants/constants';
 import { getTimeOfYear, getTimeOfDay, errorShow } from '../helpers/helperUI';
-import { showLoader, hideLoader } from '../render/renderLoader';
 
 const updateBackground = async () => {
   const timeYear = getTimeOfYear();
@@ -14,10 +15,9 @@ const updateBackground = async () => {
   console.log('Параметры запроса фонового изображения: ', `${city}, ${timeDay}, ${timeYear}, nature`);
 
   const requestBackground = `${PROXY_URL}${BACKGROUND.apiUrl}?query=${city},${timeDay},${timeYear},nature&client_id=${BACKGROUND.token}`;
-  showLoader();
   await fetch(requestBackground)
     .then((response) => {
-      if (response.status >= 400) throw new Error(`${response.status} ${response.statusText}`);
+      if (response.status >= HTTP_CODES.BAD_REQUEST) throw new Error(`${response.status} ${response.statusText}`);
       return response.json();
     })
     .then((image) => {
@@ -26,7 +26,6 @@ const updateBackground = async () => {
       findElement('body').style.backgroundSize = 'cover';
       findElement('body').setAttribute('loading', 'lazy');
     })
-    .then(hideLoader())
     .catch((error) => errorShow(error));
 };
 

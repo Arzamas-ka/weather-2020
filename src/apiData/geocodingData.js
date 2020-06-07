@@ -14,7 +14,6 @@ const getCurrentGeocoding = () => {
   let latitudeNumber;
   let longitudeNumber;
 
-
   return new Promise((resolve) => {
     const success = (data) => {
       const coordinates = data.coords;
@@ -43,8 +42,11 @@ const getCurrentGeocoding = () => {
           return `${d}${DEGREE_SIGN} ${m}'`;
         };
 
-        latitudeText.innerHTML = `${toDMS(src[0])}`;
-        longitudeText.innerHTML = `${toDMS(src[1])}`;
+        const dir0 = src[0] > 0 ? 'N' : 'S';
+        const dir1 = src[1] > 0 ? 'E' : 'W';
+
+        latitudeText.innerHTML = `${toDMS(src[0])} ${dir0}`;
+        longitudeText.innerHTML = `${toDMS(src[1])} ${dir1}`;
       };
 
       convertToDMS(source);

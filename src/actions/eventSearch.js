@@ -60,6 +60,7 @@ export const handlerSearchButton = async () => {
     createTicker();
     hideLoader();
   } catch (error) {
+    hideLoader();
     const input = findElement('.header-input');
     input.value = 'Incorrect city name';
     input.classList.add('header-input--error');
